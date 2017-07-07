@@ -6,20 +6,24 @@ from pprint import pprint
 
     
 # ファイルをパース
-def parse_log_files():
-    for target in os.listdir('target_dir'):
-        filename = 'dir/%s'%target
-        fp = open(filename, 'r')
+def parse_log_files(dir_path, regexp):
+    for target in os.listdir(dir_path):
+        fp = open(target, 'r')
         for line in fp:
-            if re.search('search_word', line):
+            if re.search(regexp, line):
                print(line)
    
         fp.close()
 
     
-print('File parse process')
+print('Type directory path: /target/dir/name')
+target_path = input('>')
+
+print('Type parse word regexp: /^search$/')
+search_regexp = input('>')
+
 try:
-    parse_log_files()
+    parse_log_files(target_path, search_regexp)
 except:
     traceback.print_exc()
     exit()
